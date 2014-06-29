@@ -28,7 +28,7 @@ def _compare_output(standart_output, testing_output):
     for index in range(0, len(standart_output_array), 1):
         if standart_output_array[index] != testing_output_array[index]:
             print 'there is different results in same step for standsret: ', standart_output_array[index], \
-                ' testing: ', testing_output_array[index]
+                ' and testing: ', testing_output_array[index]
             return False
 
     return True
@@ -44,11 +44,13 @@ def run_test(standart_app, testing_app, *scenario_files):
         (standart_output, standart_exit_code) = _run_scenario(standart_app, scenario_file)
         if standart_exit_code != 0:
             print 'Standart application finish scenario with code: ', standart_exit_code
+            passed = False
             continue
 
         (testing_output, testing_exit_code) = _run_scenario(testing_app, scenario_files)
         if testing_exit_code != 0:
             print 'Testing application finish scenario with code: ', scenario_file
+            passed = False
             continue
 
         pass_scenario = _compare_output(standart_output, testing_output)
