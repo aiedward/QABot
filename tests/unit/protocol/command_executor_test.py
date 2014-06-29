@@ -51,7 +51,3 @@ class CommandExecutorTest(unittest.TestCase):
         command = Command('other_id', None)
 
         self.assertRaises(KeyError, command_executor.execute, command)
-
-
-if __name__ == "__main__":
-    unittest.main()

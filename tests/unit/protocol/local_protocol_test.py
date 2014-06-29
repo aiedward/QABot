@@ -15,6 +15,9 @@ class FakeExecutor():
 
     FAIL_COMMAND_NAME = 'fail'
 
+    def has_executor(self, _):
+        return True
+
     def execute(self, command):
         if command.name == FakeExecutor.FAIL_COMMAND_NAME:
             raise Exception()
@@ -23,14 +26,23 @@ class FakeExecutor():
 class LocalProtocolTest(unittest.TestCase):
 
     def test_execute_should_call_execute_from_command_executor(self):
-        command = {}
+        command = Command(None,  None)
         command_executor = CommandExecutor()
         protocol = create_local_protocol(command_executor)
+        mock_method(command_executor, 'has_executor', True)
         calls = mock_method(command_executor, 'execute')
 
         protocol.execute(command)
 
         self.assertEqual(calls, [[command]])
+
+    def test_execute_should_not_throw_error_if_executor_for_command_not_found(self):
+        command_executor = CommandExecutor()
+        protocol = create_local_protocol(command_executor)
+
+        result = protocol.execute(Command('some_name', None))
+
+        self.assertEqual(result, Protocol.FAIL)
 
     def test_execute_should_not_throw_error_if_command_do(self):
         command_executor = FakeExecutor()
@@ -39,6 +51,3 @@ class LocalProtocolTest(unittest.TestCase):
         result = protocol.execute(Command(FakeExecutor.FAIL_COMMAND_NAME, None))
 
         self.assertEqual(result, Protocol.FAIL)
-
-if __name__ == "__main__":
-    unittest.main()

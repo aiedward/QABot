@@ -21,9 +21,12 @@ class LocalProtocol(Protocol):
         self._command_executor = command_executor
 
     def execute(self, command):
+        if not self._command_executor.has_executor(command.name):
+            return Protocol.FAIL
         try:
             result = self._command_executor.execute(command)
-        except:
+        except Exception, e:
+            print e
             result = Protocol.FAIL
         return result
 

@@ -8,6 +8,13 @@ class Command:
         self._name = name
         self._args = args
 
+    def __str__(self):
+        return str(self.__dict__)
+
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+                and self.__dict__ == other.__dict__)
+
     @property
     def name(self):
         """unique command name"""
@@ -21,6 +28,7 @@ class Command:
 
 class CommandExecutor():
     """class processes command by executor"""
+
     def __init__(self):
         self._executors = {}
 
