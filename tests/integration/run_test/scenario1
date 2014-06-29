@@ -1,0 +1,7 @@
+[
+    {"_name": "get_num", "_args":null},
+    {"_name": "get_str", "_args":null},
+    {"_name": "push_data", "_args":5},
+    {"_name": "push_data", "_args":"data"},
+    {"_name": "pop_data", "_args":null}
+]
