@@ -56,13 +56,13 @@ mock method should append call array after every call
     >>> calls = mock.mock_method(obj, 'method')
     >>> var = obj.method('data')
     >>> calls
-    [('data',)]
+    [['data']]
 
     >>> var = obj.method('other_data')
     >>> calls
-    [('data',), ('other_data',)]
+    [['data'], ['other_data']]
 
     >>> var = obj.method('another_data')
     >>> calls
-    [('data',), ('other_data',), ('another_data',)]
+    [['data'], ['other_data'], ['another_data']]
 

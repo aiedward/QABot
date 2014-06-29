@@ -8,5 +8,6 @@ def mock_method(obj, method_name, return_arg=None):
 
 
 def __mocker(return_value, calls, args):
-    calls.append(args)
+    array = list(args)
+    calls.append(array)
     return return_value
