@@ -16,6 +16,7 @@ class ScenarioBot():
         for command in scenario:
             command_result = self._protocol.execute(command)
             result.append(command_result)
+            #if result is Fail - stop executing scenario
             if command_result == Protocol.FAIL:
                 break
         return result
@@ -30,8 +31,7 @@ class LocalScenarioBot(ScenarioBot):
     def execute_scenario(self, json):
         try:
             scenario = load_scenario_from_json(json)
-        except ValueError, e:
-            print e
+        except ValueError:
             print Protocol.FAIL
             return
 

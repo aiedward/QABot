@@ -31,6 +31,8 @@ def load_scenario_from_json(data):
     result = Scenario()
     obj = json.loads(data)
 
+    # scenario should be list with command object
+
     if not isinstance(obj, list):
         raise ValueError('object is ' + str(type(obj)))
 

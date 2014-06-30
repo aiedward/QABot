@@ -25,8 +25,7 @@ class LocalProtocol(Protocol):
             return Protocol.FAIL
         try:
             result = self._command_executor.execute(command)
-        except Exception, e:
-            print e
+        except:
             result = Protocol.FAIL
         return result
 

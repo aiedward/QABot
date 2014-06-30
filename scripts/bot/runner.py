@@ -7,6 +7,7 @@ __author__ = 'Alexiy'
 def _run_scenario(app, scenario):
     """run scenario for application in its own process"""
     args = [app, '-scenario', scenario]
+    # run app in its own process
     process = Popen(args, stdout=PIPE, shell=True)
     (output, _) = process.communicate()
     exit_code = process.wait()
